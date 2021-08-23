@@ -11,28 +11,40 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        vector<int>vp;
+        ListNode*slow=head;
+        ListNode*fast=head;
+        
         ListNode*temp=head;
-        while(temp)
+        if(head->next==NULL||head->next==NULL)return true;
+        while(fast->next!=NULL&&fast->next->next!=NULL)
         {
-            vp.push_back(temp->val);
+            fast=fast->next->next;
+            slow=slow->next;
+        }
+        slow=reverse(slow->next);
+        bool ispalin=true;
+        while(slow!=NULL)
+        { if(slow->val!=temp->val)
+        {
+            return false;
+        }
+         slow=slow->next;
             temp=temp->next;
         }
-        bool ispalin=true;
+        return true;
         
-        int n=vp.size();
         
-        for(int i=0;i<n/2;i++)
+    }
+   ListNode* reverse(ListNode *head)
+    {
+        ListNode *newNode=NULL;
+        while(head!=NULL)
         {
-            if(vp[i]!=vp[n-i-1])
-            {
-                ispalin=false;break;
-            }
+            ListNode *next=head->next;
+            head->next=newNode;
+            newNode=head;
+            head=next;
         }
-        if(ispalin)
-        {
-          return true;  
-        }
-        return false;
+        return newNode;
     }
 };
