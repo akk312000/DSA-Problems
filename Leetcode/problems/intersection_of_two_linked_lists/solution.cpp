@@ -8,16 +8,15 @@
  */
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        
-        if(headA==NULL&&headB==NULL)return NULL;
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {ios::sync_with_stdio(false), cin.tie(NULL), cout.tie(0);
+        if(headA==NULL||headB==NULL)return NULL;
         ListNode *a=headA;
         ListNode *b=headB;
-       while(a!=b)
-       {
-           a=a==NULL?headB:a->next;
-           b=b==NULL?headA:b->next;
-       }
+        while(a!=b)
+        {
+            a=a==NULL?headB:a->next;
+            b=b==NULL?headA:b->next;
+        }
         return a;
     }
 };
