@@ -1,47 +1,36 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-        int n=s.size();
-        int table[n][n];
-        memset(table,0,sizeof(table));
+        
+     int n=s.size();
+        if(n<=1)return s;
+        int l=0,r=n-1;
         int ans=1;
-                int a=0,b;
-        for(int i=0;i<n;i++)
+        string anso;
+        for(int i=0;i<n;)
         {
-            table[i][i]=1;
-        }
-        for(int i=0;i<n-1;i++)
-        {
-            if(s[i]==s[i+1])
+            int ip=i;
+            int jp=i;
+            while(jp<n&&s[jp+1]==s[jp])
             {
-                table[i][i+1]=1;ans=2;a=i;b=i+1;
+               
+                jp++;
             }
-        }
-
-        
-        for(int k=3;k<=n;k++)
-        {
-            for(int i=0;i<n-k+1;i++)
+            i=jp+1;
+            while(jp<r&&ip>0&&s[jp+1]==s[ip-1])
             {
-                int j=i+k-1;
-                if(table[i+1][j-1]&&s[i]==s[j])
-                {
-                    table[i][j]=true;
-                   if(k>ans)
-                   {
-                       ans=k;
-                       a=i;b=j;
-                   }
-                    
-                }
+                jp++;
+                ip--;
             }
+            int new_len=jp-ip+1;
+            if(new_len>ans)
+            {
+                l=ip;
+                ans=new_len;
+            }
+           
         }
-        string temp="";
-        for(int i=a;i<a+ans;i++)
-        {
-            temp.push_back(s[i]);
-        }
-        return temp;
         
+        return s.substr(l,ans);
     }
 };
